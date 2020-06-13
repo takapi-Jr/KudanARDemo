@@ -111,16 +111,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Kudan_Lego_Marker.jpg" />
+    <AndroidAsset Include="Assets\img_zamarin.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\img_zamarin.png" />
+    <AndroidAsset Include="Assets\Kudan_Cow.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Kudan_Cow.png" />
+    <AndroidAsset Include="Assets\Kudan_Lego_Marker.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\neko.png" />
+    <AndroidAsset Include="Assets\neko.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

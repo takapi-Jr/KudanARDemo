@@ -7,9 +7,11 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EU.Kudan.Kudan;
+using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
@@ -33,9 +35,10 @@ namespace KudanARDemo.Droid
 
             //////////////////////////////////////////////////////////////////
             // 画像トラッカブルを初期化して画像をロード
+            // ビルドアクションがAndroidAssetのファイル名を指定
             ImageTrackable = new ARImageTrackable("Lego_Marker");
             ImageTrackable.LoadFromAsset("Kudan_Lego_Marker.jpg");
-            
+
             //////////////////////////////////////////////////////////////////
             // 画像トラッカーの 1 つのインスタンスを取得
             var imageTracker = ARImageTracker.Instance;
@@ -43,12 +46,18 @@ namespace KudanARDemo.Droid
 
             // 画像トラッカブルを画像トラッカーに追加
             imageTracker.AddTrackable(ImageTrackable);
-            
+
             //////////////////////////////////////////////////////////////////
             // 画像で画像ノードを初期化
+            // ビルドアクションがAndroidAssetのファイル名を指定
             var imageNode = new ARImageNode("Kudan_Cow.png");
             //var imageNode = new ARImageNode("img_zamarin.png");
             //var imageNode = new ARImageNode("neko.png");
+
+            // imageNode のサイズを Trackable のサイズに合わせる
+            var textureMaterial = imageNode.Material as ARTextureMaterial;
+            var scale = ImageTrackable.Width / textureMaterial.Texture.Width;
+            imageNode.ScaleByUniform(scale);
 
             // 画像ノードをトラッカブルのワールド空間の子として追加
             ImageTrackable.World.AddChild(imageNode);
