@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KudanARDemo.Droid</RootNamespace>
-    <AssemblyName>com.xlsoft.kudanar</AssemblyName>
+    <AssemblyName>KudanARDemo.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>

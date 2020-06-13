@@ -30,6 +30,20 @@ namespace KudanARDemo.Droid
                 return;
             }
 
+            status = await Common.CheckAndRequestPermissionAsync(new Permissions.StorageWrite());
+            if (status != PermissionStatus.Granted)
+            {
+                // Notify user permission was denied
+                return;
+            }
+
+            status = await Common.CheckAndRequestPermissionAsync(new Permissions.StorageRead());
+            if (status != PermissionStatus.Granted)
+            {
+                // Notify user permission was denied
+                return;
+            }
+
             MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(SubActivity)));
         }
     }
