@@ -15,8 +15,8 @@ using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
-    [Activity(Label = "SubActivity")]
-    public class SubActivity : ARActivity, IARImageTrackableListener
+    [Activity(Label = "MarkerARActivity")]
+    public class MarkerARActivity : ARActivity, IARImageTrackableListener
     {
         public ARImageTrackable ImageTrackable { get; set; }
 

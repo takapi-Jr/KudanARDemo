@@ -13,8 +13,8 @@ namespace KudanARDemo.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public AsyncReactiveCommand KudanARCommand { get; } = new AsyncReactiveCommand();
-
+        public AsyncReactiveCommand MarkerARCommand { get; } = new AsyncReactiveCommand();
+        public AsyncReactiveCommand MarkerLessARCommand { get; } = new AsyncReactiveCommand();
 
 
         public MainPageViewModel(INavigationService navigationService)
@@ -22,10 +22,16 @@ namespace KudanARDemo.ViewModels
         {
             Title = "Main Page";
 
-            KudanARCommand.Subscribe(async () =>
+            MarkerARCommand.Subscribe(async () =>
             {
                 var dependencyService = new Prism.Services.DependencyService();
-                await dependencyService.Get<IKudanARManager>().StartARActivityAsync();
+                await dependencyService.Get<IKudanARManager>().StartMarkerARActivityAsync();
+            });
+
+            MarkerLessARCommand.Subscribe(async () =>
+            {
+                //var dependencyService = new Prism.Services.DependencyService();
+                //await dependencyService.Get<IKudanARManager>().StartMarkerLessARActivityAsync();
             });
         }
     }

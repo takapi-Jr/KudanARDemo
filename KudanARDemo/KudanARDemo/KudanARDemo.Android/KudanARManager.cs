@@ -14,14 +14,13 @@ using KudanARDemo.Droid;
 using KudanARDemo.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using static Xamarin.Essentials.Permissions;
 
 [assembly: Dependency(typeof(KudanARManager))]
 namespace KudanARDemo.Droid
 {
     public class KudanARManager : IKudanARManager
     {
-        public async Task StartARActivityAsync()
+        public async Task StartMarkerARActivityAsync()
         {
             var status = await Common.CheckAndRequestPermissionAsync(new Permissions.Camera());
             if (status != PermissionStatus.Granted)
@@ -44,7 +43,7 @@ namespace KudanARDemo.Droid
                 return;
             }
 
-            MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(SubActivity)));
+            MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(MarkerARActivity)));
         }
     }
 }

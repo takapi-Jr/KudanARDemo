@@ -5,7 +5,8 @@
              Title="{Binding Title}">
 
     <StackLayout VerticalOptions="CenterAndExpand">
-        <Button Text="KudanAR実行" Command="{Binding KudanARCommand}" HorizontalOptions="FillAndExpand" />
+        <Button Text="マーカーAR実行" Command="{Binding MarkerARCommand}" HorizontalOptions="FillAndExpand" />
+        <Button Text="マーカーレスAR実行" Command="{Binding MarkerLessARCommand}" HorizontalOptions="FillAndExpand" IsEnabled="False" />
     </StackLayout>
 
 </ContentPage>
