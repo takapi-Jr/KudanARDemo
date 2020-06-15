@@ -6,7 +6,7 @@
 
     <StackLayout VerticalOptions="CenterAndExpand">
         <Button Text="マーカーAR実行" Command="{Binding MarkerARCommand}" HorizontalOptions="FillAndExpand" />
-        <Button Text="マーカーレスAR実行" Command="{Binding MarkerLessARCommand}" HorizontalOptions="FillAndExpand" IsEnabled="False" />
+        <Button Text="マーカーレスAR実行" Command="{Binding MarkerlessARCommand}" HorizontalOptions="FillAndExpand" />
     </StackLayout>
 
 </ContentPage>

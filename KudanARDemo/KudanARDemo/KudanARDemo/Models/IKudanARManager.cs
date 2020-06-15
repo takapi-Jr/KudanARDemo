@@ -8,6 +8,6 @@ namespace KudanARDemo.Models
     public interface IKudanARManager
     {
         Task StartMarkerARActivityAsync();
-        //Task StartMarkerLessARActivityAsync();
+        Task StartMarkerlessARActivityAsync();
     }
 }
