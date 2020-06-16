@@ -80,6 +80,7 @@
     <Compile Include="KudanARManager.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MarkerlessARActivity.cs" />
+    <Compile Include="Markerless_Wall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MarkerARActivity.cs" />
     <LinkDescription Include="LinkerSettings.xml" />

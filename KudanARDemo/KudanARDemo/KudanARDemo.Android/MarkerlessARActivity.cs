@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Core.View;
+using Com.Jme3.Math;
 using EU.Kudan.Kudan;
 
 namespace KudanARDemo.Droid
@@ -37,41 +38,59 @@ namespace KudanARDemo.Droid
             // 設定する AR コンテンツをここに記述
 
             //////////////////////////////////////////////////////////////////
+            // ターゲットとして使用されるノードを作成
+            var angles = new[] { -(float)Math.PI / 2.0f, (float)Math.PI / 2.0f, 0.0f };
+            var floorOrientation = new Quaternion(angles);
+
+            var floorScale = new Vector3f(0.25f, 0.25f, 0.25f);
+            var floorTarget = CreateImageNode("Kudan_Cow.png", floorOrientation, floorScale);
+
+            // ジャイロスコープ配置マネージャーのワールド空間にターゲット ノードを追加
+            AddNodeToGyroPlaceManager(floorTarget);
+
+            //////////////////////////////////////////////////////////////////
+            // トラッキングされるノードを作成
+            var trackingScale = new Vector3f(0.5f, 0.5f, 0.5f);
+            var trackingImageNode = CreateImageNode("img_zamarin.png", floorOrientation, trackingScale);
+
+            // ArbiTrack のセットアップ
+            SetUpArbiTrack(floorTarget, trackingImageNode);
+        }
+
+        private ARImageNode CreateImageNode(string imageName, Quaternion orientation, Vector3f scale)
+        {
+            // ノードを作成
+            var imageNode = new ARImageNode(imageName);
+
+            // 回転およびスケーリング
+            imageNode.Orientation = orientation;
+            imageNode.Scale = scale;
+
+            return imageNode;
+        }
+
+        private void AddNodeToGyroPlaceManager(ARNode node)
+        {
+            // ジャイロスコープの配置を初期化
+            var gyroPlaceManager = ARGyroPlaceManager.Instance;
+            gyroPlaceManager.Initialise();
+
+            // デバイスのジャイロスコープとともに移動するように、
+            // ジャイロスコープ配置マネージャーのワールド空間にターゲット ノードを追加
+            gyroPlaceManager.World.AddChild(node);
+        }
+
+        private void SetUpArbiTrack(ARNode targetNode, ARNode childNode)
+        {
             // ArbiTrack を初期化
             var arbiTrack = ARArbiTrack.Instance;
             arbiTrack.Initialise();
 
-            // ジャイロスコープの配置を初期化 
-            var gyroPlaceManager = ARGyroPlaceManager.Instance;
-            gyroPlaceManager.Initialise();
-
-            //////////////////////////////////////////////////////////////////
-            // ターゲットとして使用されるノードを作成
-            var targetNode = new ARImageNode("Kudan_Cow.png");
-
-            // デバイスのジャイロスコープとともに移動するように、
-            // ジャイロスコープ配置マネージャーのワールド空間にターゲット ノードを追加
-            gyroPlaceManager.World.AddChild(targetNode);
-
-            // 正しく表示されるようにノードを回転およびスケーリング
-            targetNode.RotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
-            targetNode.RotateByDegrees(180.0f, 0.0f, 1.0f, 0.0f);
-
-            targetNode.ScaleByUniform(0.3f);
-
-            // 正しく表示されるようにノードを回転およびスケーリング
+            // ターゲットノードを設定
             arbiTrack.TargetNode = targetNode;
 
-            //////////////////////////////////////////////////////////////////
-            // トラッキングされるノードを作成
-            var trackingNode = new ARImageNode("Kudan_Cow.png");
-
-            // 正しく表示されるようにノードを回転
-            trackingNode.RotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
-            trackingNode.RotateByDegrees(180.0f, 0.0f, 1.0f, 0.0f);
-
-            // ArbiTracker のワールド空間に子としてノードを追加
-            arbiTrack.World.AddChild(trackingNode);
+            // ArbiTrack のワールド空間に子としてノードを追加
+            arbiTrack.World.AddChild(childNode);
         }
 
         public override bool OnTouchEvent(MotionEvent e)

@@ -6,7 +6,8 @@
 
     <StackLayout VerticalOptions="CenterAndExpand">
         <Button Text="マーカーAR実行" Command="{Binding MarkerARCommand}" HorizontalOptions="FillAndExpand" />
-        <Button Text="マーカーレスAR実行" Command="{Binding MarkerlessARCommand}" HorizontalOptions="FillAndExpand" />
+        <Button Text="マーカーレスAR実行(フロアトラッキング)" Command="{Binding MarkerlessARCommand}" HorizontalOptions="FillAndExpand" />
+        <Button Text="マーカーレスAR実行(壁トラッキング)" Command="{Binding MarkerlessWallCommand}" HorizontalOptions="FillAndExpand" />
     </StackLayout>
 
 </ContentPage>

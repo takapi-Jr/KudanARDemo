@@ -15,6 +15,7 @@ namespace KudanARDemo.ViewModels
     {
         public AsyncReactiveCommand MarkerARCommand { get; } = new AsyncReactiveCommand();
         public AsyncReactiveCommand MarkerlessARCommand { get; } = new AsyncReactiveCommand();
+        public AsyncReactiveCommand MarkerlessWallCommand { get; } = new AsyncReactiveCommand();
 
 
         public MainPageViewModel(INavigationService navigationService)
@@ -32,6 +33,12 @@ namespace KudanARDemo.ViewModels
             {
                 var dependencyService = new Prism.Services.DependencyService();
                 await dependencyService.Get<IKudanARManager>().StartMarkerlessARActivityAsync();
+            });
+
+            MarkerlessWallCommand.Subscribe(async () =>
+            {
+                var dependencyService = new Prism.Services.DependencyService();
+                await dependencyService.Get<IKudanARManager>().StartMarkerlessWallActivityAsync();
             });
         }
     }

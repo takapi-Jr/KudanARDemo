@@ -9,5 +9,6 @@ namespace KudanARDemo.Models
     {
         Task StartMarkerARActivityAsync();
         Task StartMarkerlessARActivityAsync();
+        Task StartMarkerlessWallActivityAsync();
     }
 }

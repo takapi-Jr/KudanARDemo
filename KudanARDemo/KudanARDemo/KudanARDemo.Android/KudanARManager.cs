@@ -44,6 +44,18 @@ namespace KudanARDemo.Droid
             MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(MarkerlessARActivity)));
         }
 
+        public async Task StartMarkerlessWallActivityAsync()
+        {
+            // パーミッションチェック
+            var grantedFlag = await CheckPermissions();
+            if (!grantedFlag)
+            {
+                return;
+            }
+
+            MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(Markerless_Wall)));
+        }
+
         /// <summary>
         /// パーミッションチェック処理
         /// </summary>
