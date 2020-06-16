@@ -15,10 +15,10 @@ using KudanARDemo.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(KudanARManager))]
+[assembly: Dependency(typeof(KudanARService))]
 namespace KudanARDemo.Droid
 {
-    public class KudanARManager : IKudanARManager
+    public class KudanARService : IKudanARService
     {
         public async Task StartMarkerARActivityAsync()
         {

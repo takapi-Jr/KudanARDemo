@@ -5,6 +5,27 @@
              Title="{Binding Title}">
 
     <StackLayout VerticalOptions="CenterAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" Grid.Column="0" Source="{Binding ImageMarkerPath.Value}" HeightRequest="100" />
+            <Image Grid.Row="0" Grid.Column="1" Source="{Binding ImageNodePath.Value}" HeightRequest="100" />
+
+            <Button Grid.Row="1" Grid.Column="0" Text="マーカー画像を変更" Command="{Binding ChangeImageCommand}" CommandParameter="Marker" />
+            <Button Grid.Row="1" Grid.Column="1" Text="ノード画像を変更" Command="{Binding ChangeImageCommand}" CommandParameter="Node" />
+
+            <Button Grid.Row="2" Grid.Column="0" Text="マーカー画像を撮影" Command="{Binding TakePhotoCommand}" CommandParameter="Marker" />
+            <Button Grid.Row="2" Grid.Column="1" Text="ノード画像を撮影" Command="{Binding TakePhotoCommand}" CommandParameter="Node" />
+        </Grid>
+        
         <Button Text="マーカーAR実行" Command="{Binding MarkerARCommand}" HorizontalOptions="FillAndExpand" />
         <Button Text="マーカーレスAR実行(フロアトラッキング)" Command="{Binding MarkerlessARCommand}" HorizontalOptions="FillAndExpand" />
         <Button Text="マーカーレスAR実行(壁トラッキング)" Command="{Binding MarkerlessWallCommand}" HorizontalOptions="FillAndExpand" />

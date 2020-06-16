@@ -51,7 +51,7 @@ namespace KudanARDemo.Droid
             //////////////////////////////////////////////////////////////////
             // トラッキングされるノードを作成
             var trackingScale = new Vector3f(0.5f, 0.5f, 0.5f);
-            var trackingImageNode = CreateImageNode("img_zamarin.png", floorOrientation, trackingScale);
+            var trackingImageNode = CreateImageNode("Kudan_Cow.png", floorOrientation, trackingScale);
 
             // ArbiTrack のセットアップ
             SetUpArbiTrack(floorTarget, trackingImageNode);

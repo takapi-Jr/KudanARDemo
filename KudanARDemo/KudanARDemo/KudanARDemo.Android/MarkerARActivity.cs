@@ -11,6 +11,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using EU.Kudan.Kudan;
+using KudanARDemo.Models;
+using KudanARDemo.ViewModels;
 using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
@@ -35,9 +37,7 @@ namespace KudanARDemo.Droid
 
             //////////////////////////////////////////////////////////////////
             // 画像トラッカブルを初期化して画像をロード
-            // ビルドアクションがAndroidAssetのファイル名を指定
-            ImageTrackable = new ARImageTrackable("Lego_Marker");
-            ImageTrackable.LoadFromAsset("Kudan_Lego_Marker.jpg");
+            ImageTrackable = CreateImageTrackable(MainPageViewModel.ImageMarkerInfo.Value);
 
             //////////////////////////////////////////////////////////////////
             // 画像トラッカーの 1 つのインスタンスを取得
@@ -49,11 +49,11 @@ namespace KudanARDemo.Droid
 
             //////////////////////////////////////////////////////////////////
             // 画像で画像ノードを初期化
-            // ビルドアクションがAndroidAssetのファイル名を指定
-            var imageNode = new ARImageNode("Kudan_Cow.png");
-            //var imageNode = new ARImageNode("img_zamarin.png");
-            //var imageNode = new ARImageNode("neko.png");
+            //var imageNode = new ARImageNode("Kudan_Cow.png");
+            var texture = CreateTexture2D(MainPageViewModel.ImageNodeInfo.Value);
+            var imageNode = new ARImageNode(texture);
 
+            //////////////////////////////////////////////////////////////////
             // imageNode のサイズを Trackable のサイズに合わせる
             var textureMaterial = imageNode.Material as ARTextureMaterial;
             var scale = ImageTrackable.Width / textureMaterial.Texture.Width;
@@ -65,6 +65,41 @@ namespace KudanARDemo.Droid
             //////////////////////////////////////////////////////////////////
             // リスナー登録
             ImageTrackable.AddListener(this);
+        }
+
+        private ARImageTrackable CreateImageTrackable(ImageInfo imageInfo)
+        {
+            // 画像トラッカブルを初期化して画像をロード
+            // ビルドアクションがAndroidAssetのファイル名を指定
+            var imageTrackable = new ARImageTrackable("Lego_Marker");
+            //imageTrackable.LoadFromAsset("Kudan_Lego_Marker.jpg");
+            if (imageInfo.IsAsset)
+            {
+                imageTrackable.LoadFromAsset(imageInfo.ImagePath);
+            }
+            else
+            {
+                imageTrackable.LoadFromPath(imageInfo.ImagePath);
+            }
+
+            return imageTrackable;
+        }
+
+        private ARTexture2D CreateTexture2D(ImageInfo imageInfo)
+        {
+            // 画像で画像ノードを初期化
+            // ビルドアクションがAndroidAssetのファイル名を指定
+            var texture = new ARTexture2D();
+            if (imageInfo.IsAsset)
+            {
+                texture.LoadFromAsset(imageInfo.ImagePath);
+            }
+            else
+            {
+                texture.LoadFromPath(imageInfo.ImagePath);
+            }
+
+            return texture;
         }
 
         public void DidDetect(ARImageTrackable p0)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KudanARDemo.Models
 {
-    public interface IKudanARManager
+    public interface IKudanARService
     {
         Task StartMarkerARActivityAsync();
         Task StartMarkerlessARActivityAsync();

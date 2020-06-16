@@ -54,7 +54,7 @@ namespace KudanARDemo.Droid
 
             //////////////////////////////////////////////////////////////////
             // ArbiTrack ワールド空間に配置する画像ノードを作成
-            var trackingImageNode = CreateImageNode("img_zamarin.png", Quaternion.Identity, Vector3f.UnitXyz, new Vector3f(0.0f, 0.0f, 0.0f));
+            var trackingImageNode = CreateImageNode("Kudan_Cow.png", Quaternion.Identity, Vector3f.UnitXyz, new Vector3f(0.0f, 0.0f, 0.0f));
 
             // ArbiTrack のセットアップ
             SetUpArbiTrack(this.WallTargetNode, trackingImageNode);
