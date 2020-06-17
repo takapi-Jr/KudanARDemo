@@ -13,6 +13,8 @@ using Android.Widget;
 using AndroidX.Core.View;
 using Com.Jme3.Math;
 using EU.Kudan.Kudan;
+using KudanARDemo.Models;
+using KudanARDemo.ViewModels;
 
 namespace KudanARDemo.Droid
 {
@@ -43,7 +45,7 @@ namespace KudanARDemo.Droid
             var floorOrientation = new Quaternion(angles);
 
             var floorScale = new Vector3f(0.25f, 0.25f, 0.25f);
-            var floorTarget = CreateImageNode("Kudan_Cow.png", floorOrientation, floorScale);
+            var floorTarget = CreateImageNode(MainPageViewModel.ImageNodeInfo.Value, floorOrientation, floorScale);
 
             // ジャイロスコープ配置マネージャーのワールド空間にターゲット ノードを追加
             AddNodeToGyroPlaceManager(floorTarget);
@@ -51,22 +53,40 @@ namespace KudanARDemo.Droid
             //////////////////////////////////////////////////////////////////
             // トラッキングされるノードを作成
             var trackingScale = new Vector3f(0.5f, 0.5f, 0.5f);
-            var trackingImageNode = CreateImageNode("Kudan_Cow.png", floorOrientation, trackingScale);
+            var trackingImageNode = CreateImageNode(MainPageViewModel.ImageNodeInfo.Value, floorOrientation, trackingScale);
 
             // ArbiTrack のセットアップ
             SetUpArbiTrack(floorTarget, trackingImageNode);
         }
 
-        private ARImageNode CreateImageNode(string imageName, Quaternion orientation, Vector3f scale)
+        private ARImageNode CreateImageNode(ImageInfo imageInfo, Quaternion orientation, Vector3f scale)
         {
             // ノードを作成
-            var imageNode = new ARImageNode(imageName);
+            var texture = CreateTexture2D(imageInfo);
+            var imageNode = new ARImageNode(texture);
 
             // 回転およびスケーリング
             imageNode.Orientation = orientation;
             imageNode.Scale = scale;
 
             return imageNode;
+        }
+
+        private ARTexture2D CreateTexture2D(ImageInfo imageInfo)
+        {
+            // 画像で画像ノードを初期化
+            // ビルドアクションがAndroidAssetのファイル名を指定
+            var texture = new ARTexture2D();
+            if (imageInfo.IsAsset)
+            {
+                texture.LoadFromAsset(imageInfo.ImagePath);
+            }
+            else
+            {
+                texture.LoadFromPath(imageInfo.ImagePath);
+            }
+
+            return texture;
         }
 
         private void AddNodeToGyroPlaceManager(ARNode node)

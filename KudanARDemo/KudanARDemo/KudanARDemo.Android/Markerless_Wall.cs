@@ -13,6 +13,8 @@ using Android.Widget;
 using AndroidX.Core.View;
 using Com.Jme3.Math;
 using EU.Kudan.Kudan;
+using KudanARDemo.Models;
+using KudanARDemo.ViewModels;
 
 namespace KudanARDemo.Droid
 {
@@ -46,7 +48,7 @@ namespace KudanARDemo.Droid
             // ターゲットとして使用されるノードを作成
             var targetPosition = new Vector3f(0, 0, -1000);     // スクリーンから1000離れた場所に置く
             var wallScale = new Vector3f(0.5f, 0.5f, 0.5f);
-            this.WallTargetNode = CreateImageNode("Kudan_Cow.png", wallOrientation, wallScale, targetPosition);
+            this.WallTargetNode = CreateImageNode(MainPageViewModel.ImageNodeInfo.Value, wallOrientation, wallScale, targetPosition);
 
             //////////////////////////////////////////////////////////////////
             // ターゲットノードをコンテンツビューポートに関連付けられたカメラノードの子として追加
@@ -54,7 +56,7 @@ namespace KudanARDemo.Droid
 
             //////////////////////////////////////////////////////////////////
             // ArbiTrack ワールド空間に配置する画像ノードを作成
-            var trackingImageNode = CreateImageNode("Kudan_Cow.png", Quaternion.Identity, Vector3f.UnitXyz, new Vector3f(0.0f, 0.0f, 0.0f));
+            var trackingImageNode = CreateImageNode(MainPageViewModel.ImageNodeInfo.Value, Quaternion.Identity, Vector3f.UnitXyz, new Vector3f(0.0f, 0.0f, 0.0f));
 
             // ArbiTrack のセットアップ
             SetUpArbiTrack(this.WallTargetNode, trackingImageNode);
@@ -96,10 +98,11 @@ namespace KudanARDemo.Droid
             return rotation;
         }
 
-        private ARImageNode CreateImageNode(string imageName, Quaternion orientation, Vector3f scale, Vector3f position)
+        private ARImageNode CreateImageNode(ImageInfo imageInfo, Quaternion orientation, Vector3f scale, Vector3f position)
         {
             // ノードを作成
-            var imageNode = new ARImageNode(imageName);
+            var texture = CreateTexture2D(imageInfo);
+            var imageNode = new ARImageNode(texture);
 
             // 回転およびスケーリング
             imageNode.Orientation = orientation;
@@ -107,6 +110,23 @@ namespace KudanARDemo.Droid
             imageNode.Position = position;
 
             return imageNode;
+        }
+
+        private ARTexture2D CreateTexture2D(ImageInfo imageInfo)
+        {
+            // 画像で画像ノードを初期化
+            // ビルドアクションがAndroidAssetのファイル名を指定
+            var texture = new ARTexture2D();
+            if (imageInfo.IsAsset)
+            {
+                texture.LoadFromAsset(imageInfo.ImagePath);
+            }
+            else
+            {
+                texture.LoadFromPath(imageInfo.ImagePath);
+            }
+
+            return texture;
         }
 
         private void AddNodeToGyroPlaceManager(ARNode node)

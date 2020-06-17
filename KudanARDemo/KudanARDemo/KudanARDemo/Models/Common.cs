@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace KudanARDemo.Models
 {
@@ -24,7 +25,7 @@ namespace KudanARDemo.Models
             var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
             {
                 SaveMetaData = false,
-                PhotoSize = PhotoSize.Medium,
+                PhotoSize = PhotoSize.Full,
             });
 
             // 画像を選択しなかった場合は終了
@@ -56,7 +57,7 @@ namespace KudanARDemo.Models
                 Directory = "TempPhotos",
                 Name = "temp.jpg",
                 SaveMetaData = false,
-                PhotoSize = PhotoSize.Medium,
+                PhotoSize = PhotoSize.Full,
             });
 
             // カメラ撮影しなかった場合は終了
