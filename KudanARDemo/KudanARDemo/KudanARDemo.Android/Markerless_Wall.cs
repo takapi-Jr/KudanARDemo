@@ -19,9 +19,10 @@ using KudanARDemo.ViewModels;
 namespace KudanARDemo.Droid
 {
     [Activity(Label = "Markerless_Wall")]
-    public class Markerless_Wall : ARActivity, GestureDetector.IOnGestureListener, IARArbiTrackListener
+    public class Markerless_Wall : ARActivity, GestureDetector.IOnGestureListener, ScaleGestureDetector.IOnScaleGestureListener, IARArbiTrackListener
     {
         public GestureDetectorCompat GestureDetect { get; set; }
+        public ScaleGestureDetector ScaleGestureDetect { get; set; }
         public ARNode WallTargetNode { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -32,6 +33,7 @@ namespace KudanARDemo.Droid
 
             // ArbiTrack を開始および停止するジェスチャ認識機能を作成
             GestureDetect = new GestureDetectorCompat(this, this);
+            ScaleGestureDetect = new ScaleGestureDetector(this, this);
         }
 
         public override void Setup()
@@ -165,6 +167,7 @@ namespace KudanARDemo.Droid
         public override bool OnTouchEvent(MotionEvent e)
         {
             GestureDetect.OnTouchEvent(e);
+            ScaleGestureDetect.OnTouchEvent(e);
             return base.OnTouchEvent(e);
         }
 
@@ -223,6 +226,28 @@ namespace KudanARDemo.Droid
             var targetOrientation = arbiTrack.TargetNode.Orientation;
             var trackingNode = arbiTrack.World.Children.FirstOrDefault();
             trackingNode.Orientation = arbiTrack.World.Orientation.Inverse().Mult(targetOrientation);
+        }
+
+        public bool OnScale(ScaleGestureDetector detector)
+        {
+            // ノード画像が固定されている状態(トラッキング中)のみ拡大縮小を許可
+            var arbiTrack = ARArbiTrack.Instance;
+            if (arbiTrack.IsTracking)
+            {
+                var scale = detector.ScaleFactor;
+                arbiTrack.World.ScaleByUniform(scale);
+            }
+
+            return true;
+        }
+
+        public bool OnScaleBegin(ScaleGestureDetector detector)
+        {
+            return true;
+        }
+
+        public void OnScaleEnd(ScaleGestureDetector detector)
+        {
         }
     }
 }
