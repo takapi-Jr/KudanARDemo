@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Core.View;
 using EU.Kudan.Kudan;
 using KudanARDemo.Models;
 using KudanARDemo.ViewModels;
@@ -18,8 +19,11 @@ using Xamarin.Forms;
 namespace KudanARDemo.Droid
 {
     [Activity(Label = "MarkerARActivity")]
-    public class MarkerARActivity : ARActivity, IARImageTrackableListener
+    public class MarkerARActivity : ARActivity, IARImageTrackableListener, GestureDetector.IOnGestureListener, ScaleGestureDetector.IOnScaleGestureListener, RotationGestureDetector.IOnRotationGestureListener
     {
+        public GestureDetectorCompat GestureDetect { get; set; }
+        public ScaleGestureDetector ScaleGestureDetect { get; set; }
+        public RotationGestureDetector RotationGestureDetect { get; set; }
         public ARImageTrackable ImageTrackable { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -27,6 +31,10 @@ namespace KudanARDemo.Droid
             base.OnCreate(savedInstanceState);
 
             // Create your application here
+
+            GestureDetect = new GestureDetectorCompat(this, this);
+            ScaleGestureDetect = new ScaleGestureDetector(this, this);
+            RotationGestureDetect = new RotationGestureDetector(this);
         }
 
         public override void Setup()
@@ -115,6 +123,76 @@ namespace KudanARDemo.Droid
         public void DidTrack(ARImageTrackable p0)
         {
             System.Diagnostics.Debug.WriteLine("Did Track");
+        }
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            GestureDetect.OnTouchEvent(e);
+            ScaleGestureDetect.OnTouchEvent(e);
+            RotationGestureDetect.onTouchEvent(e);
+            return base.OnTouchEvent(e);
+        }
+
+        public bool OnDown(MotionEvent e)
+        {
+            return true;
+        }
+
+        public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+            return false;
+        }
+
+        public void OnLongPress(MotionEvent e)
+        {
+        }
+
+        public bool OnScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+        {
+            return false;
+        }
+
+        public void OnShowPress(MotionEvent e)
+        {
+        }
+
+        public bool OnSingleTapUp(MotionEvent e)
+        {
+            return false;
+        }
+
+        public bool OnScale(ScaleGestureDetector detector)
+        {
+            // 拡大縮小処理
+            var scale = detector.ScaleFactor;
+            ImageTrackable.World.Children.FirstOrDefault()?.ScaleByUniform(scale);
+
+            return true;
+        }
+
+        public bool OnScaleBegin(ScaleGestureDetector detector)
+        {
+            return true;
+        }
+
+        public void OnScaleEnd(ScaleGestureDetector detector)
+        {
+        }
+
+        public bool OnRotateBegin(RotationGestureDetector detector)
+        {
+            return true;
+        }
+
+        public void OnRotate(RotationGestureDetector detector)
+        {
+            // 回転処理
+            var angle = detector.Angle;
+            ImageTrackable.World.Children.FirstOrDefault()?.RotateByDegrees(angle, 0.0f, 0.0f, 1.0f);
+        }
+
+        public void OnRotateEnd(RotationGestureDetector detector)
+        {
         }
     }
 }

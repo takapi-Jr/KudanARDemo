@@ -238,7 +238,7 @@ namespace KudanARDemo.Droid
             if (arbiTrack.IsTracking)
             {
                 var scale = detector.ScaleFactor;
-                arbiTrack.World.Children.FirstOrDefault().ScaleByUniform(scale);
+                arbiTrack.World.Children.FirstOrDefault()?.ScaleByUniform(scale);
             }
 
             return true;
@@ -265,7 +265,7 @@ namespace KudanARDemo.Droid
             if (arbiTrack.IsTracking)
             {
                 var angle = detector.Angle;
-                arbiTrack.World.Children.FirstOrDefault().RotateByDegrees(angle, 0.0f, 0.0f, 1.0f);
+                arbiTrack.World.Children.FirstOrDefault()?.RotateByDegrees(angle, 0.0f, 0.0f, 1.0f);
             }
         }
 
