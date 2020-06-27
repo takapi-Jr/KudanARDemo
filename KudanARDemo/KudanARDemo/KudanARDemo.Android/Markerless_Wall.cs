@@ -19,10 +19,11 @@ using KudanARDemo.ViewModels;
 namespace KudanARDemo.Droid
 {
     [Activity(Label = "Markerless_Wall")]
-    public class Markerless_Wall : ARActivity, GestureDetector.IOnGestureListener, ScaleGestureDetector.IOnScaleGestureListener, IARArbiTrackListener
+    public class Markerless_Wall : ARActivity, GestureDetector.IOnGestureListener, ScaleGestureDetector.IOnScaleGestureListener, IARArbiTrackListener, RotationGestureDetector.IOnRotationGestureListener
     {
         public GestureDetectorCompat GestureDetect { get; set; }
         public ScaleGestureDetector ScaleGestureDetect { get; set; }
+        public RotationGestureDetector RotationGestureDetect { get; set; }
         public ARNode WallTargetNode { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -34,6 +35,7 @@ namespace KudanARDemo.Droid
             // ArbiTrack を開始および停止するジェスチャ認識機能を作成
             GestureDetect = new GestureDetectorCompat(this, this);
             ScaleGestureDetect = new ScaleGestureDetector(this, this);
+            RotationGestureDetect = new RotationGestureDetector(this);
         }
 
         public override void Setup()
@@ -168,12 +170,13 @@ namespace KudanARDemo.Droid
         {
             GestureDetect.OnTouchEvent(e);
             ScaleGestureDetect.OnTouchEvent(e);
+            RotationGestureDetect.onTouchEvent(e);
             return base.OnTouchEvent(e);
         }
 
         public bool OnDown(MotionEvent e)
         {
-            return false;
+            return true;
         }
 
         public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
@@ -235,7 +238,7 @@ namespace KudanARDemo.Droid
             if (arbiTrack.IsTracking)
             {
                 var scale = detector.ScaleFactor;
-                arbiTrack.World.ScaleByUniform(scale);
+                arbiTrack.World.Children.FirstOrDefault().ScaleByUniform(scale);
             }
 
             return true;
@@ -247,6 +250,26 @@ namespace KudanARDemo.Droid
         }
 
         public void OnScaleEnd(ScaleGestureDetector detector)
+        {
+        }
+
+        public bool OnRotateBegin(RotationGestureDetector detector)
+        {
+            return true;
+        }
+
+        public void OnRotate(RotationGestureDetector detector)
+        {
+            // ノード画像が固定されている状態(トラッキング中)のみ回転を許可
+            var arbiTrack = ARArbiTrack.Instance;
+            if (arbiTrack.IsTracking)
+            {
+                var angle = detector.Angle;
+                arbiTrack.World.Children.FirstOrDefault().RotateByDegrees(angle, 0.0f, 0.0f, 1.0f);
+            }
+        }
+
+        public void OnRotateEnd(RotationGestureDetector detector)
         {
         }
     }
