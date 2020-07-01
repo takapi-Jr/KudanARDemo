@@ -69,6 +69,8 @@ namespace KudanARDemo.Droid
 
             // 画像ノードをトラッカブルのワールド空間の子として追加
             ImageTrackable.World.AddChild(imageNode);
+            //var modelNode = CreateModelNode();
+            //ImageTrackable.World.AddChild(modelNode);
 
             //////////////////////////////////////////////////////////////////
             // リスナー登録
@@ -109,6 +111,38 @@ namespace KudanARDemo.Droid
 
             return texture;
         }
+
+#if false   // 3Dモデル使用
+
+        private ARModelNode CreateModelNode()
+        {
+            // Import model
+            var modelImporter = new ARModelImporter();
+            modelImporter.LoadFromAsset("bigBen.jet");
+            var modelNode = modelImporter.Node;
+
+            // Load model texture
+            var texture2D = new ARTexture2D();
+            texture2D.LoadFromAsset("bigBenTexture.png");
+
+            // Apply model texture to model texture material
+            var material = new ARLightMaterial();
+            material.SetTexture(texture2D);
+            material.SetAmbient(0.8f, 0.8f, 0.8f);
+
+            // Apply texture material to models mesh nodes
+            foreach (var meshNode in modelImporter.MeshNodes)
+            {
+                meshNode.Material = material;
+            }
+
+            modelNode.RotateByDegrees(90.0f, 1.0f, 0.0f, 0.0f);
+            modelNode.ScaleByUniform(0.25f);
+
+            return modelNode;
+        }
+
+#endif
 
         public void DidDetect(ARImageTrackable p0)
         {

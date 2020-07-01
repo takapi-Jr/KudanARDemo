@@ -61,6 +61,7 @@ namespace KudanARDemo.Droid
             //////////////////////////////////////////////////////////////////
             // ArbiTrack ワールド空間に配置する画像ノードを作成
             var trackingImageNode = CreateImageNode(MainPageViewModel.ImageNodeInfo.Value, Quaternion.Identity, Vector3f.UnitXyz, new Vector3f(0.0f, 0.0f, 0.0f));
+            //var trackingImageNode = CreateModelNode(Quaternion.Identity, Vector3f.UnitXyz, new Vector3f(0.0f, 0.0f, 0.0f));
 
             // ArbiTrack のセットアップ
             SetUpArbiTrack(this.WallTargetNode, trackingImageNode);
@@ -132,6 +133,39 @@ namespace KudanARDemo.Droid
 
             return texture;
         }
+
+#if false   // 3Dモデル使用
+
+        private ARModelNode CreateModelNode(Quaternion orientation, Vector3f scale, Vector3f position)
+        {
+            // Import model
+            var modelImporter = new ARModelImporter();
+            modelImporter.LoadFromAsset("bigBen.jet");
+            var modelNode = modelImporter.Node;
+
+            // Load model texture
+            var texture2D = new ARTexture2D();
+            texture2D.LoadFromAsset("bigBenTexture.png");
+
+            // Apply model texture to model texture material
+            var material = new ARLightMaterial();
+            material.SetTexture(texture2D);
+            material.SetAmbient(0.8f, 0.8f, 0.8f);
+
+            // Apply texture material to models mesh nodes
+            foreach (var meshNode in modelImporter.MeshNodes)
+            {
+                meshNode.Material = material;
+            }
+
+            modelNode.RotateByDegrees(90.0f, 0.0f, 0.0f, 1.0f);
+            modelNode.ScaleByUniform(0.25f);
+            modelNode.Position = position;
+
+            return modelNode;
+        }
+
+#endif
 
         private void AddNodeToGyroPlaceManager(ARNode node)
         {
