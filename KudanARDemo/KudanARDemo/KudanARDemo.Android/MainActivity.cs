@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
 using EU.Kudan.Kudan;
 using KudanARDemo.Droid;
 using KudanARDemo.Models;
@@ -10,13 +11,17 @@ using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
-    [Activity(Label = "KudanARDemo", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "KudanARDemo", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static MainActivity Instance { get; private set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            // スプラッシュスクリーンの後に通常のテーマに戻るよう設定
+            base.Window.RequestFeature(WindowFeatures.ActionBar);
+            base.SetTheme(Resource.Style.MainTheme);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

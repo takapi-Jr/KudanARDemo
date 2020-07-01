@@ -18,7 +18,7 @@ using KudanARDemo.ViewModels;
 
 namespace KudanARDemo.Droid
 {
-    [Activity(Label = "MarkerlessARActivity")]
+    [Activity(Label = "MarkerlessAR(Floor)")]
     public class MarkerlessARActivity : ARActivity, GestureDetector.IOnGestureListener, ScaleGestureDetector.IOnScaleGestureListener, RotationGestureDetector.IOnRotationGestureListener
     {
         public GestureDetectorCompat GestureDetect { get; set; }

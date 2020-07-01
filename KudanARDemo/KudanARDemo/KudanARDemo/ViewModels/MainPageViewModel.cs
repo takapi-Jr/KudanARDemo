@@ -42,7 +42,7 @@ namespace KudanARDemo.ViewModels
         public MainPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "Main Page";
+            Title = "HOME";
 
             ImageMarkerInfo.Subscribe(imageInfo =>
             {

@@ -18,7 +18,7 @@ using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
-    [Activity(Label = "MarkerARActivity")]
+    [Activity(Label = "MarkerAR")]
     public class MarkerARActivity : ARActivity, IARImageTrackableListener, GestureDetector.IOnGestureListener, ScaleGestureDetector.IOnScaleGestureListener, RotationGestureDetector.IOnRotationGestureListener
     {
         public GestureDetectorCompat GestureDetect { get; set; }
