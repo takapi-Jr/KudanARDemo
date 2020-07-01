@@ -85,7 +85,6 @@
     <PackageReference Include="Prism.Unity.Forms" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.cs" />
     <Compile Include="KudanARService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MarkerlessARActivity.cs" />

@@ -20,10 +20,17 @@ namespace KudanARDemo.Droid
 {
     public class KudanARService : IKudanARService
     {
+        public static readonly List<Permissions.BasePermission> KudanARPermissions = new List<Permissions.BasePermission>
+        {
+            new Permissions.Camera(),
+            new Permissions.StorageWrite(),
+            new Permissions.StorageRead(),
+        };
+
         public async Task StartMarkerARActivityAsync()
         {
             // パーミッションチェック
-            var grantedFlag = await CheckPermissions();
+            var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
                 return;
@@ -35,7 +42,7 @@ namespace KudanARDemo.Droid
         public async Task StartMarkerlessARActivityAsync()
         {
             // パーミッションチェック
-            var grantedFlag = await CheckPermissions();
+            var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
                 return;
@@ -47,43 +54,13 @@ namespace KudanARDemo.Droid
         public async Task StartMarkerlessWallActivityAsync()
         {
             // パーミッションチェック
-            var grantedFlag = await CheckPermissions();
+            var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
                 return;
             }
 
             MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(Markerless_Wall)));
-        }
-
-        /// <summary>
-        /// パーミッションチェック処理
-        /// </summary>
-        /// <returns>権限付与フラグ(true:付与された, false:付与されなかった)</returns>
-        private async Task<bool> CheckPermissions()
-        {
-            var status = await Common.CheckAndRequestPermissionAsync(new Permissions.Camera());
-            if (status != PermissionStatus.Granted)
-            {
-                // Notify user permission was denied
-                return false;
-            }
-
-            status = await Common.CheckAndRequestPermissionAsync(new Permissions.StorageWrite());
-            if (status != PermissionStatus.Granted)
-            {
-                // Notify user permission was denied
-                return false;
-            }
-
-            status = await Common.CheckAndRequestPermissionAsync(new Permissions.StorageRead());
-            if (status != PermissionStatus.Granted)
-            {
-                // Notify user permission was denied
-                return false;
-            }
-
-            return true;
         }
     }
 }
