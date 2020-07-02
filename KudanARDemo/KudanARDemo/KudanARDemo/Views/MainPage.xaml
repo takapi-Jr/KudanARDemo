@@ -4,6 +4,11 @@
              x:Class="KudanARDemo.Views.MainPage"
              Title="{Binding Title}">
 
+    <!-- ツールバー -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="Info.png" Command="{Binding SettingCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <StackLayout VerticalOptions="CenterAndExpand">
         <Grid>
             <Grid.RowDefinitions>

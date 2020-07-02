@@ -11,6 +11,13 @@ namespace KudanARDemo.Models
 {
     public class Common
     {
+        public static readonly string NETStandardLibrary = "NETStandard.Library";
+        public static readonly string PrismUnityForms = "Prism.Unity.Forms";
+        public static readonly string ReactiveProperty = "ReactiveProperty";
+        public static readonly string XamPluginMedia = "Xam.Plugin.Media";
+        public static readonly string XamarinEssentialsInterfaces = "Xamarin.Essentials.Interfaces";
+        public static readonly string XamarinForms = "Xamarin.Forms";
+
         public static readonly List<Permissions.BasePermission> GetImagePermissions = new List<Permissions.BasePermission>
         {
             new Permissions.StorageWrite(),

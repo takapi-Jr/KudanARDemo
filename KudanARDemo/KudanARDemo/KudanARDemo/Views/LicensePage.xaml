@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="KudanARDemo.Views.LicensePage"
+             Title="{Binding Title}">
+
+    <!-- オープンソースライセンス一覧 -->
+    <CollectionView ItemsSource="{Binding LibNameList.Value}" BackgroundColor="White" SelectionMode="Single" 
+                    SelectedItem="{Binding SelectedLibName.Value}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Spacing="0">
+                    <Frame Padding="15" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" RowSpacing="10">
+                            <Label Text="{Binding .}" FontSize="Medium" />
+                        </Grid>
+                    </Frame>
+                    <BoxView Style="{StaticResource DefaultLineStyle}" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+</ContentPage>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="KudanARDemo.Views.SettingPage"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <StackLayout BackgroundColor="White">
+            <BoxView Style="{StaticResource DefaultLineStyle}" />
+            <Frame Padding="15" HasShadow="False">
+                <Grid HorizontalOptions="FillAndExpand" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="アプリ名" HorizontalOptions="StartAndExpand" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding AppName.Value}" HorizontalOptions="EndAndExpand" />
+                </Grid>
+            </Frame>
+            <BoxView Style="{StaticResource DefaultLineStyle}" />
+            <Frame Padding="15" HasShadow="False">
+                <Grid HorizontalOptions="FillAndExpand" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="製作者" HorizontalOptions="Start" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="takapi_cs" HorizontalOptions="End" />
+                </Grid>
+            </Frame>
+            <BoxView Style="{StaticResource DefaultLineStyle}" />
+            <Frame Padding="15" HasShadow="False">
+                <Grid HorizontalOptions="FillAndExpand" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="バージョン情報" HorizontalOptions="Start" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Version.Value}" HorizontalOptions="End" />
+                </Grid>
+            </Frame>
+            <BoxView Style="{StaticResource DefaultLineStyle}" />
+            <Frame Padding="15" HasShadow="False">
+                <Grid HorizontalOptions="FillAndExpand" RowSpacing="10">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LicenseCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label Text="ライセンス情報..." HorizontalOptions="Start" />
+                </Grid>
+            </Frame>
+            <BoxView Style="{StaticResource DefaultLineStyle}" />
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>

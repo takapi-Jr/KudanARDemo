@@ -3,15 +3,12 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using EU.Kudan.Kudan;
-using KudanARDemo.Droid;
-using KudanARDemo.Models;
 using Prism;
 using Prism.Ioc;
-using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
-    [Activity(Label = "KudanARDemo", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "KudanAR", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static MainActivity Instance { get; private set; }

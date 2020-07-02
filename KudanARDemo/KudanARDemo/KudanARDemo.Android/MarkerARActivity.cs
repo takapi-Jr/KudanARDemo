@@ -14,7 +14,6 @@ using AndroidX.Core.View;
 using EU.Kudan.Kudan;
 using KudanARDemo.Models;
 using KudanARDemo.ViewModels;
-using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {

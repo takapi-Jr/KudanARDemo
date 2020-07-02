@@ -34,6 +34,9 @@ namespace KudanARDemo
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
+            containerRegistry.RegisterForNavigation<LicensePage, LicensePageViewModel>();
+            containerRegistry.RegisterForNavigation<LicenseDetailPage, LicenseDetailPageViewModel>();
         }
     }
 }

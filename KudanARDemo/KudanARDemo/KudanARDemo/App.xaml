@@ -3,9 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              x:Class="KudanARDemo.App">
-  <Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
 
-    <!-- Application resource dictionary -->
+            <!-- Application resource dictionary -->
 
-  </Application.Resources>
+            <!-- Colors -->
+            <Color x:Key="Divider">#BDBDBD</Color>
+
+            <!-- Style Global -->
+            <Style x:Key="DefaultLineStyle" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="Color" Value="{StaticResource Divider}" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
 </prism:PrismApplication>
