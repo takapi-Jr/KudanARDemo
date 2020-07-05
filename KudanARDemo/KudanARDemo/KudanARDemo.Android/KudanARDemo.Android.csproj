@@ -67,7 +67,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="KudanARBindLib">
-      <HintPath>..\..\..\..\KudanARBindLib\KudanARBindLib\bin\Release\KudanARBindLib.dll</HintPath>
+      <HintPath>..\..\..\KudanARBindLib\KudanARBindLib\bin\Release\KudanARBindLib.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />

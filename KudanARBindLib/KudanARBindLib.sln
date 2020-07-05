@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KudanARBindLib", "KudanARBindLib\KudanARBindLib.csproj", "{2FCC1BB1-71FD-4C39-8039-BE82A08C1ACE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FCC1BB1-71FD-4C39-8039-BE82A08C1ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FCC1BB1-71FD-4C39-8039-BE82A08C1ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FCC1BB1-71FD-4C39-8039-BE82A08C1ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FCC1BB1-71FD-4C39-8039-BE82A08C1ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C40386F-D3BC-43BA-A0DB-2262F5C04BBE}
+	EndGlobalSection
+EndGlobal
