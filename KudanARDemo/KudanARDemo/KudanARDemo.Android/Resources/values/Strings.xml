@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
-	<string name="app_name">KudanARDemo.Droid</string>
+  <string name="hello">Hello World, Click Me!</string>
+  <string name="app_name">KudanARDemo.Droid</string>
+  <string name="marker_description">マーカーに近づけてください</string>
+  <string name="markerless_description">タップして画像を固定させてください</string>
 </resources>

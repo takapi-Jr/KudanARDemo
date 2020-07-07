@@ -31,6 +31,15 @@ namespace KudanARDemo.Droid
 
             // Create your application here
 
+            // 説明文を表示
+            SetContentView(Resource.Layout.OverlayView);
+            var textView = FindViewById<TextView>(Resource.Id.textView1);
+            var label = GetString(Resource.String.marker_description);
+            textView.SetText(label, TextView.BufferType.Normal);
+
+            // フェードアウト処理
+            Animation.FadeOut(textView);
+
             GestureDetect = new GestureDetectorCompat(this, this);
             ScaleGestureDetect = new ScaleGestureDetector(this, this);
             RotationGestureDetect = new RotationGestureDetector(this);
