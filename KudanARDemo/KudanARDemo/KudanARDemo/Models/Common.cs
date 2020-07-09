@@ -2,6 +2,7 @@
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -94,7 +95,15 @@ namespace KudanARDemo.Models
                 return null;
             }
 
-            return file.Path;
+            // 画像ファイルをリネームして、不要な一時ファイルが溜まらないよう削除
+            var dir = Path.GetDirectoryName(file.Path);
+            var ext = Path.GetExtension(file.Path);
+            var path = Path.Combine(dir, $"temp{ext}");
+            File.Copy(file.Path, path, true);
+            File.Delete(file.Path);
+            file.Dispose();
+
+            return path;
         }
 
         public static async Task<string> TakePhoto()
@@ -133,7 +142,15 @@ namespace KudanARDemo.Models
                 return null;
             }
 
-            return file.Path;
+            // 画像ファイルをリネームして、不要な一時ファイルが溜まらないよう削除
+            var dir = Path.GetDirectoryName(file.Path);
+            var ext = Path.GetExtension(file.Path);
+            var path = Path.Combine(dir, $"temp{ext}");
+            File.Copy(file.Path, path, true);
+            File.Delete(file.Path);
+            file.Dispose();
+
+            return path;
         }
     }
 }

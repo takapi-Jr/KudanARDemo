@@ -47,11 +47,13 @@ namespace KudanARDemo.ViewModels
 
             ImageMarkerInfo.Subscribe(imageInfo =>
             {
+                ImageMarkerPath.Value = null;
                 ImageMarkerPath.Value = imageInfo.ImagePath;
             }).AddTo(this.Disposable);
 
             ImageNodeInfo.Subscribe(imageInfo =>
             {
+                ImageNodePath.Value = null;
                 ImageNodePath.Value = imageInfo.ImagePath;
             }).AddTo(this.Disposable);
 
@@ -62,24 +64,12 @@ namespace KudanARDemo.ViewModels
 
                 if (param.Contains(MarkerStr))
                 {
-                    // 前回指定したマーカー画像の一時ファイルを削除
-                    if (!ImageMarkerInfo.Value.IsAsset)
-                    {
-                        File.Delete(ImageMarkerInfo.Value.ImagePath);
-                    }
-
                     imageInfo.ImagePath = File.Exists(imagePath) ? imagePath : ImageMarkerFileName;
                     imageInfo.IsAsset = !File.Exists(imagePath);
                     ImageMarkerInfo.Value = imageInfo;
                 }
                 else if(param.Contains(NodeStr))
                 {
-                    // 前回指定したノード画像の一時ファイルを削除
-                    if (!ImageNodeInfo.Value.IsAsset)
-                    {
-                        File.Delete(ImageNodeInfo.Value.ImagePath);
-                    }
-
                     imageInfo.ImagePath = File.Exists(imagePath) ? imagePath : ImageNodeFileName;
                     imageInfo.IsAsset = !File.Exists(imagePath);
                     ImageNodeInfo.Value = imageInfo;
