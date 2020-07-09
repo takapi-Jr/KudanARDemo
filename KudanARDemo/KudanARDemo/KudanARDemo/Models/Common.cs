@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace KudanARDemo.Models
 {
-    public class Common
+    public static class Common
     {
         public static readonly string NETStandardLibrary = "NETStandard.Library";
         public static readonly string PrismUnityForms = "Prism.Unity.Forms";
@@ -63,6 +63,10 @@ namespace KudanARDemo.Models
             return status;
         }
 
+        /// <summary>
+        /// 画像を選択してファイルパスを取得
+        /// </summary>
+        /// <returns></returns>
         public static async Task<string> GetImagePath()
         {
             // パーミッションチェック
@@ -106,6 +110,10 @@ namespace KudanARDemo.Models
             return path;
         }
 
+        /// <summary>
+        /// カメラで撮影してファイルパスを取得
+        /// </summary>
+        /// <returns></returns>
         public static async Task<string> TakePhoto()
         {
             // パーミッションチェック
