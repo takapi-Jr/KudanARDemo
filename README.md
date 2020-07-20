@@ -5,4 +5,4 @@ Kudan ARを使用したサンプルアプリ(Xamarin.FormsでAndroid側のみ実
 - バンドルIDに合ったライセンスキーを設定する
 
 アプリのインストールページはこちら  
-[Google Play = KudanARアプリ](https://play.google.com/store/apps/details?id=com.takapi_cs.kudanar)  
+[Google Play - KudanARアプリ](https://play.google.com/store/apps/details?id=com.takapi_cs.kudanar)  
