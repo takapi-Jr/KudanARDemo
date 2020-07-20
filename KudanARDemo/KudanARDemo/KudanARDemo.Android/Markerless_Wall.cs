@@ -74,6 +74,9 @@ namespace KudanARDemo.Droid
 
             // ArbiTrack のセットアップ
             SetUpArbiTrack(this.WallTargetNode, trackingImageNode);
+
+            // ビジー状態を解除
+            MainPageViewModel.IsBusy.Value = false;
         }
 
         private static Quaternion WallOrientationForDeviceOrientation()

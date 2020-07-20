@@ -83,6 +83,9 @@ namespace KudanARDemo.Droid
             //////////////////////////////////////////////////////////////////
             // リスナー登録
             ImageTrackable.AddListener(this);
+
+            // ビジー状態を解除
+            MainPageViewModel.IsBusy.Value = false;
         }
 
         private ARImageTrackable CreateImageTrackable(ImageInfo imageInfo)

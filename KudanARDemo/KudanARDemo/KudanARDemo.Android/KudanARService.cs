@@ -35,8 +35,15 @@ namespace KudanARDemo.Droid
             {
                 return;
             }
-
-            MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(MarkerARActivity)));
+            
+            await Task.Run(() =>
+            {
+                var context = Android.App.Application.Context;
+                using (var intent = new Android.Content.Intent(context, typeof(MarkerARActivity)))
+                {
+                    context.StartActivity(intent);
+                }
+            });
         }
 
         public async Task StartMarkerlessARActivityAsync()
@@ -48,7 +55,14 @@ namespace KudanARDemo.Droid
                 return;
             }
 
-            MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(MarkerlessARActivity)));
+            await Task.Run(() =>
+            {
+                var context = Android.App.Application.Context;
+                using (var intent = new Android.Content.Intent(context, typeof(MarkerlessARActivity)))
+                {
+                    context.StartActivity(intent);
+                }
+            });
         }
 
         public async Task StartMarkerlessWallActivityAsync()
@@ -60,7 +74,14 @@ namespace KudanARDemo.Droid
                 return;
             }
 
-            MainActivity.Instance.StartActivity(new Android.Content.Intent(MainActivity.Instance, typeof(Markerless_Wall)));
+            await Task.Run(() =>
+            {
+                var context = Android.App.Application.Context;
+                using (var intent = new Android.Content.Intent(context, typeof(Markerless_Wall)))
+                {
+                    context.StartActivity(intent);
+                }
+            });
         }
     }
 }

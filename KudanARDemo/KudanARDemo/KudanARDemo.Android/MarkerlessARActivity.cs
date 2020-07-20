@@ -70,6 +70,9 @@ namespace KudanARDemo.Droid
 
             // ArbiTrack のセットアップ
             SetUpArbiTrack(floorTarget, trackingImageNode);
+
+            // ビジー状態を解除
+            MainPageViewModel.IsBusy.Value = false;
         }
 
         private ARImageNode CreateImageNode(ImageInfo imageInfo, Quaternion orientation, Vector3f scale)
