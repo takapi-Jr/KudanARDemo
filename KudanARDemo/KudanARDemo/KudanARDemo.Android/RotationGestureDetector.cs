@@ -122,9 +122,9 @@ namespace KudanARDemo.Droid
 
         public interface IOnRotationGestureListener
         {
-            public bool OnRotateBegin(RotationGestureDetector detector);
-            public void OnRotate(RotationGestureDetector detector);
-            public void OnRotateEnd(RotationGestureDetector detector);
+            bool OnRotateBegin(RotationGestureDetector detector);
+            void OnRotate(RotationGestureDetector detector);
+            void OnRotateEnd(RotationGestureDetector detector);
         }
     }
 }
