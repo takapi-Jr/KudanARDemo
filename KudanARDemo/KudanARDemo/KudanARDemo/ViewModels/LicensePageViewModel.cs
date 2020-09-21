@@ -28,6 +28,7 @@ namespace KudanARDemo.ViewModels
             LibNameList.Value = new List<string>
             {
                 Common.NETStandardLibrary,
+                Common.PluginCurrentActivity,
                 Common.PrismUnityForms,
                 Common.ReactiveProperty,
                 Common.XamPluginMedia,

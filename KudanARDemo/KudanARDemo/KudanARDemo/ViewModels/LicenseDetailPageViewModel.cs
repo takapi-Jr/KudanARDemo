@@ -35,6 +35,11 @@ namespace KudanARDemo.ViewModels
                 LibCopyright.Value = this.NETStandardLibrary_LicenseText;
                 LibLicense.Value = this.MITLicenseText;
             }
+            else if (libName.Equals(Common.PluginCurrentActivity))
+            {
+                LibCopyright.Value = this.PluginCurrentActivity_LicenseText;
+                LibLicense.Value = this.MITLicenseText;
+            }
             else if (libName.Equals(Common.PrismUnityForms))
             {
                 LibCopyright.Value = this.PrismUnityForms_LicenseText;
@@ -96,6 +101,14 @@ SOFTWARE.
 The MIT License (MIT)
 Copyright (c) .NET Foundation and Contributors
 All rights reserved.
+
+
+--------------------------------";
+
+        public string PluginCurrentActivity_LicenseText { get; } = @"
+■[Prism.Unity.Forms]
+The MIT License (MIT)
+Copyright (c) 2016 James Montemagno
 
 
 --------------------------------";

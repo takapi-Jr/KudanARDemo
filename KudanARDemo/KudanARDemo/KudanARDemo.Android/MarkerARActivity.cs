@@ -14,6 +14,7 @@ using AndroidX.Core.View;
 using EU.Kudan.Kudan;
 using KudanARDemo.Models;
 using KudanARDemo.ViewModels;
+using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
@@ -84,8 +85,11 @@ namespace KudanARDemo.Droid
             // リスナー登録
             ImageTrackable.AddListener(this);
 
-            // ビジー状態を解除
-            MainPageViewModel.IsBusy.Value = false;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                // ビジー状態を解除
+                MainPageViewModel.IsBusy.Value = false;
+            });
         }
 
         private ARImageTrackable CreateImageTrackable(ImageInfo imageInfo)

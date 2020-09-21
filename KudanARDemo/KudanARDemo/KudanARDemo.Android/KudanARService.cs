@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using KudanARDemo.Droid;
 using KudanARDemo.Models;
+using KudanARDemo.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -33,17 +34,16 @@ namespace KudanARDemo.Droid
             var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
+                // ビジー状態を解除
+                MainPageViewModel.IsBusy.Value = false;
                 return;
             }
-            
-            await Task.Run(() =>
+
+            var context = (Context)Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity;
+            using (var intent = new Android.Content.Intent(context, typeof(MarkerARActivity)))
             {
-                var context = Android.App.Application.Context;
-                using (var intent = new Android.Content.Intent(context, typeof(MarkerARActivity)))
-                {
-                    context.StartActivity(intent);
-                }
-            });
+                context.StartActivity(intent);
+            }
         }
 
         public async Task StartMarkerlessARActivityAsync()
@@ -52,17 +52,16 @@ namespace KudanARDemo.Droid
             var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
+                // ビジー状態を解除
+                MainPageViewModel.IsBusy.Value = false;
                 return;
             }
 
-            await Task.Run(() =>
+            var context = (Context)Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity;
+            using (var intent = new Android.Content.Intent(context, typeof(MarkerlessARActivity)))
             {
-                var context = Android.App.Application.Context;
-                using (var intent = new Android.Content.Intent(context, typeof(MarkerlessARActivity)))
-                {
-                    context.StartActivity(intent);
-                }
-            });
+                context.StartActivity(intent);
+            }
         }
 
         public async Task StartMarkerlessWallActivityAsync()
@@ -71,17 +70,16 @@ namespace KudanARDemo.Droid
             var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
+                // ビジー状態を解除
+                MainPageViewModel.IsBusy.Value = false;
                 return;
             }
 
-            await Task.Run(() =>
+            var context = (Context)Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity;
+            using (var intent = new Android.Content.Intent(context, typeof(Markerless_Wall)))
             {
-                var context = Android.App.Application.Context;
-                using (var intent = new Android.Content.Intent(context, typeof(Markerless_Wall)))
-                {
-                    context.StartActivity(intent);
-                }
-            });
+                context.StartActivity(intent);
+            }
         }
     }
 }

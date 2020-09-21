@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
@@ -15,6 +15,7 @@ using Com.Jme3.Math;
 using EU.Kudan.Kudan;
 using KudanARDemo.Models;
 using KudanARDemo.ViewModels;
+using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
@@ -75,8 +76,11 @@ namespace KudanARDemo.Droid
             // ArbiTrack のセットアップ
             SetUpArbiTrack(this.WallTargetNode, trackingImageNode);
 
-            // ビジー状態を解除
-            MainPageViewModel.IsBusy.Value = false;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                // ビジー状態を解除
+                MainPageViewModel.IsBusy.Value = false;
+            });
         }
 
         private static Quaternion WallOrientationForDeviceOrientation()
@@ -245,6 +249,11 @@ namespace KudanARDemo.Droid
 
         public bool OnSingleTapUp(MotionEvent e)
         {
+            if (MainPageViewModel.IsBusy.Value == true)
+            {
+                return false;
+            }
+
             var arbiTrack = ARArbiTrack.Instance;
 
             if (arbiTrack.IsTracking)

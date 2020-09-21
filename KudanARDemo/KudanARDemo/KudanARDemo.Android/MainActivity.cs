@@ -29,6 +29,7 @@ namespace KudanARDemo.Droid
             var key = ARAPIKey.Instance;
             key.SetAPIKey(ApiKey.KudanARApiKey);
 
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidInitializer()));

@@ -14,6 +14,7 @@ using Com.Jme3.Math;
 using EU.Kudan.Kudan;
 using KudanARDemo.Models;
 using KudanARDemo.ViewModels;
+using Xamarin.Forms;
 
 namespace KudanARDemo.Droid
 {
@@ -71,8 +72,11 @@ namespace KudanARDemo.Droid
             // ArbiTrack のセットアップ
             SetUpArbiTrack(floorTarget, trackingImageNode);
 
-            // ビジー状態を解除
-            MainPageViewModel.IsBusy.Value = false;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                // ビジー状態を解除
+                MainPageViewModel.IsBusy.Value = false;
+            });
         }
 
         private ARImageNode CreateImageNode(ImageInfo imageInfo, Quaternion orientation, Vector3f scale)
@@ -194,6 +198,11 @@ namespace KudanARDemo.Droid
 
         public bool OnSingleTapUp(MotionEvent e)
         {
+            if (MainPageViewModel.IsBusy.Value == true)
+            {
+                return false;
+            }
+
             var arbiTrack = ARArbiTrack.Instance;
 
             if (arbiTrack.IsTracking)

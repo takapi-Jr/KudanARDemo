@@ -13,6 +13,7 @@ namespace KudanARDemo.Models
     public static class Common
     {
         public static readonly string NETStandardLibrary = "NETStandard.Library";
+        public static readonly string PluginCurrentActivity = "Plugin.CurrentActivity";
         public static readonly string PrismUnityForms = "Prism.Unity.Forms";
         public static readonly string ReactiveProperty = "ReactiveProperty";
         public static readonly string XamPluginMedia = "Xam.Plugin.Media";
