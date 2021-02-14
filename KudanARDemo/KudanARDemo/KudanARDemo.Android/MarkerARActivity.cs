@@ -32,6 +32,9 @@ namespace KudanARDemo.Droid
 
             // Create your application here
 
+            // Activityテーマを設定
+            base.SetTheme(Resource.Style.MainTheme);
+
             // 説明文を表示
             SetContentView(Resource.Layout.OverlayView);
             var textView = FindViewById<TextView>(Resource.Id.textView1);
