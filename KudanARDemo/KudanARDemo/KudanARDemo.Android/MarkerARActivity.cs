@@ -33,7 +33,7 @@ namespace KudanARDemo.Droid
             // Create your application here
 
             // Activityテーマを設定
-            base.SetTheme(Resource.Style.MainTheme);
+            base.SetTheme(Resource.Style.ARActivityTheme);
 
             // 説明文を表示
             SetContentView(Resource.Layout.OverlayView);
