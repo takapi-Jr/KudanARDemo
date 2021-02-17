@@ -12,6 +12,7 @@ namespace KudanARDemo.Models
 {
     public static class Common
     {
+        public static readonly string GlideXForms = "glidex.forms";
         public static readonly string NETStandardLibrary = "NETStandard.Library";
         public static readonly string PluginCurrentActivity = "Plugin.CurrentActivity";
         public static readonly string PrismUnityForms = "Prism.Unity.Forms";
@@ -19,6 +20,7 @@ namespace KudanARDemo.Models
         public static readonly string XamPluginMedia = "Xam.Plugin.Media";
         public static readonly string XamarinEssentialsInterfaces = "Xamarin.Essentials.Interfaces";
         public static readonly string XamarinForms = "Xamarin.Forms";
+        public static readonly string XamarinFormsPancakeView = "Xamarin.Forms.PancakeView";
 
         public static readonly List<Permissions.BasePermission> GetImagePermissions = new List<Permissions.BasePermission>
         {

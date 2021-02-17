@@ -27,6 +27,7 @@ namespace KudanARDemo.ViewModels
 
             LibNameList.Value = new List<string>
             {
+                Common.GlideXForms,
                 Common.NETStandardLibrary,
                 Common.PluginCurrentActivity,
                 Common.PrismUnityForms,
@@ -34,6 +35,7 @@ namespace KudanARDemo.ViewModels
                 Common.XamPluginMedia,
                 Common.XamarinEssentialsInterfaces,
                 Common.XamarinForms,
+                Common.XamarinFormsPancakeView,
             };
 
             SelectedLibName.Subscribe(async libName =>

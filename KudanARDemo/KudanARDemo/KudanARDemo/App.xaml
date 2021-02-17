@@ -10,6 +10,7 @@
 
             <!-- Colors -->
             <Color x:Key="Divider">#BDBDBD</Color>
+            <Color x:Key="XamarinBlue">#00A5F2</Color>
 
             <!-- Style Global -->
             <Style x:Key="DefaultLineStyle" TargetType="BoxView">

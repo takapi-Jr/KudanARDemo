@@ -30,7 +30,12 @@ namespace KudanARDemo.ViewModels
             LibCopyright.Value = string.Empty;
             LibLicense.Value = string.Empty;
 
-            if (libName.Equals(Common.NETStandardLibrary))
+            if (libName.Equals(Common.GlideXForms))
+            {
+                LibCopyright.Value = this.GlideXForms_LicenseText;
+                LibLicense.Value = this.MITLicenseText;
+            }
+            else if (libName.Equals(Common.NETStandardLibrary))
             {
                 LibCopyright.Value = this.NETStandardLibrary_LicenseText;
                 LibLicense.Value = this.MITLicenseText;
@@ -65,6 +70,11 @@ namespace KudanARDemo.ViewModels
                 LibCopyright.Value = this.XamarinForms_LicenseText;
                 LibLicense.Value = this.MITLicenseText;
             }
+            else if (libName.Equals(Common.XamarinFormsPancakeView))
+            {
+                LibCopyright.Value = this.XamarinFormsPancakeView_LicenseText;
+                LibLicense.Value = this.MITLicenseText;
+            }
         }
 
 
@@ -92,6 +102,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+--------------------------------";
+
+        public string GlideXForms_LicenseText { get; } = @"
+■[glidex.forms]
+The MIT License (MIT)
+Copyright (c) 2018 Jonathan Peppers
 
 
 --------------------------------";
@@ -150,6 +168,14 @@ Copyright (c) 2018 Ryan Davis
 The MIT License (MIT)
 Copyright (c) .NET Foundation Contributors
 All rights reserved.
+
+
+--------------------------------";
+
+        public string XamarinFormsPancakeView_LicenseText { get; } = @"
+■[Xamarin.Forms.PancakeView]
+The MIT License (MIT)
+Copyright (c) 2019 Steven Thewissen
 
 
 --------------------------------";

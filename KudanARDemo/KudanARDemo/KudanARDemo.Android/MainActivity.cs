@@ -32,6 +32,7 @@ namespace KudanARDemo.Droid
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Android.Glide.Forms.Init(this, debug: true);
             LoadApplication(new App(new AndroidInitializer()));
 
             //Instance = this;

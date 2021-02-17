@@ -6,6 +6,7 @@ using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
@@ -29,12 +30,31 @@ namespace KudanARDemo.ViewModels
 
         public ReactiveProperty<string> ImageMarkerPath { get; } = new ReactiveProperty<string>();
         public ReactiveProperty<string> ImageNodePath { get; } = new ReactiveProperty<string>();
+        public ReactiveProperty<ObservableCollection<KudanARKind>> ARKindList { get; } = new ReactiveProperty<ObservableCollection<KudanARKind>>(new ObservableCollection<KudanARKind>()
+            {
+                new KudanARKind
+                {
+                    Name = "マーカーAR",
+                    Image = "MarkerAR_Sample.jpg",
+                    CommandParameter = "MarkerAR",
+                },
+                new KudanARKind
+                {
+                    Name = "マーカーレスAR(フロアトラッキング)",
+                    Image = "MarkerlessAR_Floor_Sample.jpg",
+                    CommandParameter = "MarkerlessAR_Floor",
+                },
+                new KudanARKind
+                {
+                    Name = "マーカーレスAR(壁トラッキング)",
+                    Image = "MarkerlessAR_Wall_Sample.jpg",
+                    CommandParameter = "MarkerlessAR_Wall",
+                },
+            });
 
         public AsyncReactiveCommand<string> ChangeImageCommand { get; } = new AsyncReactiveCommand<string>();
         public AsyncReactiveCommand<string> TakePhotoCommand { get; } = new AsyncReactiveCommand<string>();
-        public AsyncReactiveCommand MarkerARCommand { get; } = new AsyncReactiveCommand();
-        public AsyncReactiveCommand MarkerlessARCommand { get; } = new AsyncReactiveCommand();
-        public AsyncReactiveCommand MarkerlessWallCommand { get; } = new AsyncReactiveCommand();
+        public AsyncReactiveCommand<string> ExecuteARCommand { get; } = new AsyncReactiveCommand<string>();
         public AsyncReactiveCommand SettingCommand { get; } = new AsyncReactiveCommand();
 
         private CompositeDisposable Disposable { get; } = new CompositeDisposable();
@@ -65,13 +85,13 @@ namespace KudanARDemo.ViewModels
                 var imagePath = await Common.GetImagePath();
                 var imageInfo = new ImageInfo();
 
-                if (param.Contains(MarkerStr))
+                if (param.Equals(MarkerStr))
                 {
                     imageInfo.ImagePath = File.Exists(imagePath) ? imagePath : ImageMarkerFileName;
                     imageInfo.IsAsset = !File.Exists(imagePath);
                     ImageMarkerInfo.Value = imageInfo;
                 }
-                else if (param.Contains(NodeStr))
+                else if (param.Equals(NodeStr))
                 {
                     imageInfo.ImagePath = File.Exists(imagePath) ? imagePath : ImageNodeFileName;
                     imageInfo.IsAsset = !File.Exists(imagePath);
@@ -87,13 +107,13 @@ namespace KudanARDemo.ViewModels
                 var imagePath = await Common.TakePhoto();
                 var imageInfo = new ImageInfo();
 
-                if (param.Contains(MarkerStr))
+                if (param.Equals(MarkerStr))
                 {
                     imageInfo.ImagePath = File.Exists(imagePath) ? imagePath : ImageMarkerFileName;
                     imageInfo.IsAsset = !File.Exists(imagePath);
                     ImageMarkerInfo.Value = imageInfo;
                 }
-                else if (param.Contains(NodeStr))
+                else if (param.Equals(NodeStr))
                 {
                     imageInfo.ImagePath = File.Exists(imagePath) ? imagePath : ImageNodeFileName;
                     imageInfo.IsAsset = !File.Exists(imagePath);
@@ -102,29 +122,24 @@ namespace KudanARDemo.ViewModels
                 IsBusy.Value = false;
             }).AddTo(this.Disposable);
 
-            MarkerARCommand = IsBusy.Inverse().ToAsyncReactiveCommand();
-            MarkerARCommand.Subscribe(async () =>
+            ExecuteARCommand = IsBusy.Inverse().ToAsyncReactiveCommand<string>();
+            ExecuteARCommand.Subscribe(async (param) =>
             {
-                IsBusy.Value = true;
-                await Xamarin.Forms.DependencyService.Get<IKudanARService>().StartMarkerARActivityAsync();
-                // Activity側でビジーフラグ変更
-                //IsBusy.Value = false;
-            }).AddTo(this.Disposable);
-
-            MarkerlessARCommand = IsBusy.Inverse().ToAsyncReactiveCommand();
-            MarkerlessARCommand.Subscribe(async () =>
-            {
-                IsBusy.Value = true;
-                await Xamarin.Forms.DependencyService.Get<IKudanARService>().StartMarkerlessARActivityAsync();
-                // Activity側でビジーフラグ変更
-                //IsBusy.Value = false;
-            }).AddTo(this.Disposable);
-
-            MarkerlessWallCommand = IsBusy.Inverse().ToAsyncReactiveCommand();
-            MarkerlessWallCommand.Subscribe(async () =>
-            {
-                IsBusy.Value = true;
-                await Xamarin.Forms.DependencyService.Get<IKudanARService>().StartMarkerlessWallActivityAsync();
+                if (param.Equals("MarkerAR"))
+                {
+                    IsBusy.Value = true;
+                    await Xamarin.Forms.DependencyService.Get<IKudanARService>().StartMarkerARActivityAsync();
+                }
+                else if (param.Equals("MarkerlessAR_Floor"))
+                {
+                    IsBusy.Value = true;
+                    await Xamarin.Forms.DependencyService.Get<IKudanARService>().StartMarkerlessARActivityAsync();
+                }
+                else if (param.Equals("MarkerlessAR_Wall"))
+                {
+                    IsBusy.Value = true;
+                    await Xamarin.Forms.DependencyService.Get<IKudanARService>().StartMarkerlessWallActivityAsync();
+                }
                 // Activity側でビジーフラグ変更
                 //IsBusy.Value = false;
             }).AddTo(this.Disposable);
@@ -132,9 +147,7 @@ namespace KudanARDemo.ViewModels
             SettingCommand = IsBusy.Inverse().ToAsyncReactiveCommand();
             SettingCommand.Subscribe(async () =>
             {
-                IsBusy.Value = true;
                 await this.NavigationService.NavigateAsync("SettingPage");
-                IsBusy.Value = false;
             }).AddTo(this.Disposable);
         }
 

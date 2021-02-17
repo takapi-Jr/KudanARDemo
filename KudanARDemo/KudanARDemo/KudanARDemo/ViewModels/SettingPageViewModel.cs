@@ -25,7 +25,7 @@ namespace KudanARDemo.ViewModels
         public SettingPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "AppInfo";
+            Title = "アプリ情報";
 
             // バージョン情報設定
             AppName.Value = AppInfo.Name;
