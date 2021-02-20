@@ -246,11 +246,6 @@ namespace KudanARDemo.Droid
 
         public bool OnSingleTapUp(MotionEvent e)
         {
-            if (MainPageViewModel.IsBusy.Value == true)
-            {
-                return false;
-            }
-
             var arbiTrack = ARArbiTrack.Instance;
 
             if (arbiTrack.IsTracking)
