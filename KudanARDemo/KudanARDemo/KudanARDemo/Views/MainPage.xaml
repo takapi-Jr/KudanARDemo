@@ -17,7 +17,7 @@
                 <DataTemplate>
                     <ContentView>
                         <StackLayout Margin="20">
-                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding Name}" Margin="10,0,0,0" />
                             <yummy:PancakeView BackgroundColor="White" CornerRadius="30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                 <yummy:PancakeView.Shadow>
                                     <yummy:DropShadow Color="LightGray" Offset="10, 10" />
@@ -40,10 +40,10 @@
             <yummy:PancakeView.Shadow>
                 <yummy:DropShadow Color="LightGray" Offset="10, 10" />
             </yummy:PancakeView.Shadow>
-            <Grid RowDefinitions="*, Auto" ColumnDefinitions="*, *" Margin="10">
-                <!--<Label Text="マーカー画像" />-->
-                <Image Grid.Row="0" Grid.Column="0" Source="{Binding ImageMarkerPath.Value}" HeightRequest="100" />
-                <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*, *" HeightRequest="40">
+            <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="*, *" Margin="10">
+                <Label Grid.Row="0" Grid.Column="0" Text="マーカー画像" HorizontalTextAlignment="Center" />
+                <Image Grid.Row="1" Grid.Column="0" Source="{Binding ImageMarkerPath.Value}" />
+                <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*, *" HeightRequest="40">
                     <yummy:PancakeView Grid.Column="0" BackgroundColor="{StaticResource XamarinBlue}" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <yummy:PancakeView.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChangeImageCommand}" CommandParameter="Marker" />
@@ -57,9 +57,9 @@
                         <Image Source="Camera.png" Margin="10" />
                     </yummy:PancakeView>
                 </Grid>
-                <!--<Label Text="ノード画像" />-->
-                <Image Grid.Row="0" Grid.Column="1" Source="{Binding ImageNodePath.Value}" HeightRequest="100" />
-                <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="*, *" HeightRequest="40">
+                <Label Grid.Row="0" Grid.Column="1" Text="ノード画像" HorizontalTextAlignment="Center" />
+                <Image Grid.Row="1" Grid.Column="1" Source="{Binding ImageNodePath.Value}" />
+                <Grid Grid.Row="2" Grid.Column="1" ColumnDefinitions="*, *" HeightRequest="40">
                     <yummy:PancakeView Grid.Column="0" BackgroundColor="{StaticResource XamarinBlue}" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <yummy:PancakeView.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChangeImageCommand}" CommandParameter="Node" />
