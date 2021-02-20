@@ -87,12 +87,6 @@ namespace KudanARDemo.Droid
             //////////////////////////////////////////////////////////////////
             // リスナー登録
             ImageTrackable.AddListener(this);
-
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                // ビジー状態を解除
-                MainPageViewModel.IsBusy.Value = false;
-            });
         }
 
         private ARImageTrackable CreateImageTrackable(ImageInfo imageInfo)
@@ -245,6 +239,14 @@ namespace KudanARDemo.Droid
 
         public void OnRotateEnd(RotationGestureDetector detector)
         {
+        }
+
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+
+            // ビジー状態を解除
+            MainPageViewModel.IsBusy.Value = false;
         }
     }
 }
