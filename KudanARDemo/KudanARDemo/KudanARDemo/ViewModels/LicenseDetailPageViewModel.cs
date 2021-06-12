@@ -30,9 +30,24 @@ namespace KudanARDemo.ViewModels
             LibCopyright.Value = string.Empty;
             LibLicense.Value = string.Empty;
 
-            if (libName.Equals(Common.GlideXForms))
+            if (libName.Equals(Common.AcrUserDialogs))
+            {
+                LibCopyright.Value = this.AcrUserDialogs_LicenseText;
+                LibLicense.Value = this.MITLicenseText;
+            }
+            else if (libName.Equals(Common.GlideXForms))
             {
                 LibCopyright.Value = this.GlideXForms_LicenseText;
+                LibLicense.Value = this.MITLicenseText;
+            }
+            else if (libName.Equals(Common.GraphQLClient))
+            {
+                LibCopyright.Value = this.GraphQLClient_LicenseText;
+                LibLicense.Value = this.MITLicenseText;
+            }
+            else if (libName.Equals(Common.GraphQLClientSerializerNewtonsoft))
+            {
+                LibCopyright.Value = this.GraphQLClientSerializerNewtonsoft_LicenseText;
                 LibLicense.Value = this.MITLicenseText;
             }
             else if (libName.Equals(Common.NETStandardLibrary))
@@ -106,10 +121,34 @@ SOFTWARE.
 
 --------------------------------";
 
+        public string AcrUserDialogs_LicenseText { get; } = @"
+■[Acr.UserDialogs]
+The MIT License (MIT)
+Copyright (c) 2016 Allan Ritchie
+
+
+--------------------------------";
+
         public string GlideXForms_LicenseText { get; } = @"
 ■[glidex.forms]
 The MIT License (MIT)
 Copyright (c) 2018 Jonathan Peppers
+
+
+--------------------------------";
+
+        public string GraphQLClient_LicenseText { get; } = @"
+■[GraphQL.Client]
+The MIT License (MIT)
+Copyright (c) 2017 graphql-dotnet
+
+
+--------------------------------";
+
+        public string GraphQLClientSerializerNewtonsoft_LicenseText { get; } = @"
+■[GraphQL.Client.Serializer.Newtonsoft]
+The MIT License (MIT)
+Copyright (c) 2017 graphql-dotnet
 
 
 --------------------------------";

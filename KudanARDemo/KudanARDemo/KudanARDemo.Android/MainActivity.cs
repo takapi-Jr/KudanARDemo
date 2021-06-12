@@ -12,9 +12,7 @@ namespace KudanARDemo.Droid
     [Activity(Label = "KudanAR", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme.Splash", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        //public static MainActivity Instance { get; private set; }
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             // スプラッシュスクリーンの後に通常のテーマに戻るよう設定
             base.Window.RequestFeature(WindowFeatures.ActionBar);
@@ -26,16 +24,19 @@ namespace KudanARDemo.Droid
             base.OnCreate(savedInstanceState);
 
             // KudanARAPIキー設定
-            var key = ARAPIKey.Instance;
-            key.SetAPIKey(ApiKey.KudanARApiKey);
+            if (string.IsNullOrEmpty(ApiKey.KudanARApiKey))
+            {
+                var appSyncResponse = await AppSyncService.Instance.ExecQueryAsync<GetKudanARApiKey>(AppSyncService.ApiName_GetKudanARApiKey);
+                ApiKey.KudanARApiKey = appSyncResponse?.Response?.Data?.ApiKey;
+            }
+            ARAPIKey.Instance.SetAPIKey(ApiKey.KudanARApiKey);
 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Android.Glide.Forms.Init(this, debug: true);
+            Acr.UserDialogs.UserDialogs.Init(this);
             LoadApplication(new App(new AndroidInitializer()));
-
-            //Instance = this;
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)

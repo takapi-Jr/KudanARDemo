@@ -27,6 +27,9 @@ namespace KudanARDemo.ViewModels
 
             LibNameList.Value = new List<string>
             {
+                Common.AcrUserDialogs,
+                Common.GraphQLClient,
+                Common.GraphQLClientSerializerNewtonsoft,
                 Common.GlideXForms,
                 Common.NETStandardLibrary,
                 Common.PluginCurrentActivity,

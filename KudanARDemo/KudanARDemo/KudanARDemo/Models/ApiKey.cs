@@ -7,8 +7,10 @@ namespace KudanARDemo.Models
     public class ApiKey
     {
 #if true
+        public static readonly string AppSyncApiUrl = "";
+        public static readonly string AppSyncApiKey = "";
 
-        public static readonly string KudanARApiKey = "";
+        public static string KudanARApiKey { get; set; }
 #else
 
         // 下記パッケージ名使用時のAPIキー(有効期限 2021/01/01)

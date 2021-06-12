@@ -12,7 +12,10 @@ namespace KudanARDemo.Models
 {
     public static class Common
     {
+        public static readonly string AcrUserDialogs = "Acr.UserDialogs";
         public static readonly string GlideXForms = "glidex.forms";
+        public static readonly string GraphQLClient = "GraphQL.Client";
+        public static readonly string GraphQLClientSerializerNewtonsoft = "GraphQL.Client.Serializer.Newtonsoft";
         public static readonly string NETStandardLibrary = "NETStandard.Library";
         public static readonly string PluginCurrentActivity = "Plugin.CurrentActivity";
         public static readonly string PrismUnityForms = "Prism.Unity.Forms";

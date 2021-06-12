@@ -1,0 +1,10 @@
+query GetKudanARApiKey {
+  GetKudanARApiKey {
+    result {
+      status_code
+    }
+    data {
+      api_key
+    }
+  }
+}

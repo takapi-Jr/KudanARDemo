@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="GraphQLs\GetKudanARApiKey.gql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.514" />
+    <PackageReference Include="GraphQL.Client" Version="3.2.4" />
+    <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="3.2.4" />
     <PackageReference Include="ReactiveProperty" Version="7.7.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />

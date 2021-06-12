@@ -1,4 +1,5 @@
-﻿using KudanARDemo.Models;
+﻿using Acr.UserDialogs;
+using KudanARDemo.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -14,6 +15,7 @@ using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace KudanARDemo.ViewModels
 {
@@ -149,6 +151,16 @@ namespace KudanARDemo.ViewModels
             {
                 await this.NavigationService.NavigateAsync("SettingPage");
             }).AddTo(this.Disposable);
+        }
+
+        public override void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
+
+            if (string.IsNullOrEmpty(ApiKey.KudanARApiKey))
+            {
+                UserDialogs.Instance.Alert("KudanARのAPIキー取得に失敗しました", $"{AppInfo.Name}", "OK");
+            }
         }
 
         public void Dispose()
