@@ -127,6 +127,13 @@ namespace KudanARDemo.ViewModels
             ExecuteARCommand = IsBusy.Inverse().ToAsyncReactiveCommand<string>();
             ExecuteARCommand.Subscribe(async (param) =>
             {
+                if (string.IsNullOrEmpty(ApiKey.KudanARApiKey))
+                {
+                    await UserDialogs.Instance.AlertAsync("KudanARのAPIキー取得に失敗しました", $"{AppInfo.Name}", "OK");
+                    await Xamarin.Forms.DependencyService.Get<IKudanARService>().Init();
+                    return;
+                }
+
                 if (param.Equals("MarkerAR"))
                 {
                     IsBusy.Value = true;
@@ -151,16 +158,6 @@ namespace KudanARDemo.ViewModels
             {
                 await this.NavigationService.NavigateAsync("SettingPage");
             }).AddTo(this.Disposable);
-        }
-
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-
-            if (string.IsNullOrEmpty(ApiKey.KudanARApiKey))
-            {
-                UserDialogs.Instance.Alert("KudanARのAPIキー取得に失敗しました", $"{AppInfo.Name}", "OK");
-            }
         }
 
         public void Dispose()

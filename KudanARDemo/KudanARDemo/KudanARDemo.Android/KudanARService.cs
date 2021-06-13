@@ -28,10 +28,16 @@ namespace KudanARDemo.Droid
             new Permissions.StorageRead(),
         };
 
+        public async Task Init()
+        {
+            // KudanARAPIキー設定
+            await KudanARDemo.Droid.Common.InitKudanAR();
+        }
+
         public async Task StartMarkerARActivityAsync()
         {
             // パーミッションチェック
-            var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
+            var grantedFlag = await KudanARDemo.Models.Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
                 // ビジー状態を解除
@@ -49,7 +55,7 @@ namespace KudanARDemo.Droid
         public async Task StartMarkerlessARActivityAsync()
         {
             // パーミッションチェック
-            var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
+            var grantedFlag = await KudanARDemo.Models.Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
                 // ビジー状態を解除
@@ -67,7 +73,7 @@ namespace KudanARDemo.Droid
         public async Task StartMarkerlessWallActivityAsync()
         {
             // パーミッションチェック
-            var grantedFlag = await Common.CheckPermissions(KudanARPermissions);
+            var grantedFlag = await KudanARDemo.Models.Common.CheckPermissions(KudanARPermissions);
             if (!grantedFlag)
             {
                 // ビジー状態を解除

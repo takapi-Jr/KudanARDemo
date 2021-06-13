@@ -7,6 +7,7 @@ namespace KudanARDemo.Models
 {
     public interface IKudanARService
     {
+        Task Init();
         Task StartMarkerARActivityAsync();
         Task StartMarkerlessARActivityAsync();
         Task StartMarkerlessWallActivityAsync();
