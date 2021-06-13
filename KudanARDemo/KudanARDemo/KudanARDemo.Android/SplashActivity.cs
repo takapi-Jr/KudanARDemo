@@ -12,18 +12,14 @@ namespace KudanARDemo.Droid
               NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
-        protected override async void OnCreate(Bundle savedInstanceState)
+        // Launches the startup task
+        protected override async void OnResume()
         {
-            base.OnCreate(savedInstanceState);
+            base.OnResume();
 
             // KudanARAPIキー設定(XF初期化前のため、DependencyService使用不可)
             await KudanARDemo.Droid.Common.InitKudanAR();
-        }
 
-        // Launches the startup task
-        protected override void OnResume()
-        {
-            base.OnResume();
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }
