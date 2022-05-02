@@ -53,6 +53,8 @@ namespace KudanARDemo.ViewModels
                     CommandParameter = "MarkerlessAR_Wall",
                 },
             });
+        public ReactiveProperty<int> ARKindPosition { get; } = new ReactiveProperty<int>();
+        public ReactiveProperty<double> ImageMarkerOpacity { get; } = new ReactiveProperty<double>();
 
         public AsyncReactiveCommand<string> ChangeImageCommand { get; } = new AsyncReactiveCommand<string>();
         public AsyncReactiveCommand<string> TakePhotoCommand { get; } = new AsyncReactiveCommand<string>();
@@ -78,6 +80,11 @@ namespace KudanARDemo.ViewModels
             {
                 ImageNodePath.Value = null;
                 ImageNodePath.Value = imageInfo.ImagePath;
+            }).AddTo(this.Disposable);
+
+            ARKindPosition.Subscribe(position =>
+            {
+                ImageMarkerOpacity.Value = position == 0 ? 1.0f : 0.5f;
             }).AddTo(this.Disposable);
 
             ChangeImageCommand = IsBusy.Inverse().ToAsyncReactiveCommand<string>();
@@ -163,6 +170,17 @@ namespace KudanARDemo.ViewModels
         public void Dispose()
         {
             this.Disposable.Dispose();
+        }
+
+        public override async void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
+            
+            if (parameters.ContainsKey("ActivityMode"))
+            {
+                var activityMode = parameters.GetValue<string>("ActivityMode");
+                await ExecuteARCommand.ExecuteAsync(activityMode);
+            }
         }
     }
 }

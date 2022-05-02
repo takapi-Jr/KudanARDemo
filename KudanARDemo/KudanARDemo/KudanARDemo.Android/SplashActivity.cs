@@ -10,6 +10,8 @@ namespace KudanARDemo.Droid
     [Activity(Theme = "@style/MainTheme.Splash",
               MainLauncher = true,
               NoHistory = true)]
+    [IntentFilter(new[] { Intent.ActionView }, AutoVerify = true, Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
+        DataScheme = "https", DataHost = "", DataPathPrefix = "")]
     public class SplashActivity : AppCompatActivity
     {
         // Launches the startup task
@@ -20,7 +22,16 @@ namespace KudanARDemo.Droid
             // KudanARAPIキー設定(XF初期化前のため、DependencyService使用不可)
             await KudanARDemo.Droid.Common.InitKudanAR();
 
-            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+            var action = Intent.Action;
+            var strLink = Intent.DataString;
+            var intent = new Intent(Application.Context, typeof(MainActivity));
+            if (Intent.ActionView == action && !string.IsNullOrWhiteSpace(strLink))
+            {
+                intent.SetAction(Intent.ActionView);
+                intent.SetData(Intent.Data);
+            }
+
+            StartActivity(intent);
         }
     }
 }

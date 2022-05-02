@@ -12,7 +12,7 @@
     </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="3*, Auto, 2*">
-        <CarouselView Grid.Row="0" ItemsSource="{Binding ARKindList.Value}" IndicatorView="indicatorView" PeekAreaInsets="30">
+        <CarouselView Grid.Row="0" ItemsSource="{Binding ARKindList.Value}" Position="{Binding ARKindPosition.Value}" IndicatorView="indicatorView" PeekAreaInsets="30">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <ContentView>
@@ -42,7 +42,7 @@
             </yummy:PancakeView.Shadow>
             <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="*, *" Margin="10">
                 <Label Grid.Row="0" Grid.Column="0" Text="マーカー画像" HorizontalTextAlignment="Center" />
-                <Image Grid.Row="1" Grid.Column="0" Source="{Binding ImageMarkerPath.Value}" />
+                <Image Grid.Row="1" Grid.Column="0" Source="{Binding ImageMarkerPath.Value}" Opacity="{Binding ImageMarkerOpacity.Value}" />
                 <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*, *" HeightRequest="40">
                     <yummy:PancakeView Grid.Column="0" BackgroundColor="{StaticResource XamarinBlue}" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <yummy:PancakeView.GestureRecognizers>

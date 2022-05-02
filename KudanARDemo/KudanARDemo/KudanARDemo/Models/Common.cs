@@ -11,6 +11,8 @@ namespace KudanARDemo.Models
 {
     public static class Common
     {
+        public static readonly string AppDomain = "";
+
         public static readonly string AcrUserDialogs = "Acr.UserDialogs";
         public static readonly string GlideXForms = "glidex.forms";
         public static readonly string GraphQLClient = "GraphQL.Client";

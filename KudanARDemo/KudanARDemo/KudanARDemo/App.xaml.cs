@@ -6,6 +6,10 @@ using Xamarin.Essentials.Interfaces;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using KudanARDemo.Models;
+using System;
+using System.Linq;
+using Prism.Navigation;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KudanARDemo
@@ -37,6 +41,34 @@ namespace KudanARDemo
             containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
             containerRegistry.RegisterForNavigation<LicensePage, LicensePageViewModel>();
             containerRegistry.RegisterForNavigation<LicenseDetailPage, LicenseDetailPageViewModel>();
+        }
+
+        protected override async void OnAppLinkRequestReceived(Uri uri)
+        {
+            if (!uri.ToString().ToLowerInvariant().StartsWith(Common.AppDomain, StringComparison.Ordinal))
+            {
+                return;
+            }
+            
+            var query = uri.Query;
+            if (!query.StartsWith("?"))
+            {
+                return;
+            }
+            query = query.Substring(1);
+            var parsedQuery = System.Web.HttpUtility.ParseQueryString(query);
+            var activityMode = parsedQuery.AllKeys.Contains("mode") ? parsedQuery.Get("mode") : string.Empty;
+            
+            if (!string.IsNullOrEmpty(activityMode))
+            {
+                var navigationParameters = new NavigationParameters()
+                {
+                    { "ActivityMode", activityMode },
+                };
+                await NavigationService.NavigateAsync("/NavigationPage/MainPage", navigationParameters);
+            }
+
+            base.OnAppLinkRequestReceived(uri);
         }
     }
 }
